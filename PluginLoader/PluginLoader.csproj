@@ -10,4 +10,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>CS8604</NoWarn>
+  </PropertyGroup>
+
 </Project>
