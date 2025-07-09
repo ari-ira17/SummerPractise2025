@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "task13", "task13\task13.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "task13tests", "task13tests\task13tests.csproj", "{60654860-6DFD-42E3-A17E-03C861CDAAE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationAndDeserialization", "SerializationAndDeserialization\SerializationAndDeserialization.csproj", "{044A7C29-E17F-4A56-BD2B-BC0B2C42EC1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{60654860-6DFD-42E3-A17E-03C861CDAAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60654860-6DFD-42E3-A17E-03C861CDAAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60654860-6DFD-42E3-A17E-03C861CDAAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044A7C29-E17F-4A56-BD2B-BC0B2C42EC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044A7C29-E17F-4A56-BD2B-BC0B2C42EC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044A7C29-E17F-4A56-BD2B-BC0B2C42EC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044A7C29-E17F-4A56-BD2B-BC0B2C42EC1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
