@@ -6,50 +6,40 @@ public class DefiniteIntegral
 {
     public static double Solve(double a, double b, Func<double, double> function, double step, int threadsnumber)
     {
-        double square = 0;
         double length_for_thread = (b - a) / threadsnumber;
+        double[] partial_sums = new double[threadsnumber];
 
-        Thread[] threads = new Thread[threadsnumber];
-        Barrier barrier = new Barrier(threadsnumber);
-        object locker = new object();
-
-        for (int i = 0; i < threadsnumber; i++)
+        Parallel.For(0, threadsnumber, i =>
         {
-            int i_therad = i;
+            double x1 = a + i * length_for_thread;
+            double x2 = (i == threadsnumber - 1) ? b : x1 + length_for_thread;
 
-            threads[i] = new Thread(() => 
+            double local_sum = 0;
+            for (double x = x1; x < x2; x += step)
             {
-                double x1 = a + i_therad * length_for_thread;
-                double x2;
+                double x_next = Math.Min(x + step, x2);
+                local_sum += 0.5 * (function(x) + function(x_next)) * (x_next - x);
+            }
+            partial_sums[i] = local_sum;
+        });
 
-                if (i + 1 != threadsnumber)
-                { 
-                    x2 = x1 + length_for_thread; 
-                }
-                else { x2 = b; }
+        return partial_sums.Sum();
+    }
 
-                double s_thread = 0;
-                
-                for (double j = x1; j < x2; j += step)
-                {
-                    double x1_thread = j;
-                    double x2_thread = Math.Min(j + step, x2);
-                    s_thread += 0.5 * (function(x1_thread) + function(x2_thread)) * (x2_thread - x1_thread);
-                }
+    public static double Solve_OneThread(double a, double b, Func<double, double> function, double step)        
+    {
+        double square = 0;
+        int n = (int)( (b - a) / step);
 
-                lock (locker)
-                { square += s_thread;}
+        for (int i = 0; i < n; i++) 
+        {
+            double x1 = a + i * step;
+            double x2 = a + (i + 1) * step;
+            double s = 0.5 * (function(x1) + function(x2)) * step;
 
-                barrier.SignalAndWait();
-            });
-        }
-
-        foreach (var thread in threads)
-        { thread.Start(); }
-
-        foreach (var thread in threads)
-        { thread.Join(); }
+            square += s;
+        }   
 
         return square;
-    }
+    } 
 }
